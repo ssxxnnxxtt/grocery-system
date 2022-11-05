@@ -15,4 +15,10 @@ public class ProductService {
     public List<Product> getAllProducts() {
         return productRepository.findAll();
     }
+
+    public void cutStock(Long productID, Integer remaining){
+        Product product = productRepository.findById(productID).get();
+        product.setProductQuantity(remaining);
+        productRepository.save(product);
+    }
 }

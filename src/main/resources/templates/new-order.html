@@ -12,6 +12,31 @@
     <link rel="stylesheet" th:href="@{/css/new_order/item.css}">
     <link rel="stylesheet" th:href="@{/css/new_order/accept-notify.css}">
     <link rel="stylesheet" th:href="@{/css/new_order/reject-notify.css}">
+
+    <!--pop up-->
+    <link rel="stylesheet" href=
+            "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity=
+                  "sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity=
+                    "sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+            crossorigin="anonymous">
+    </script>
+    <script src=
+                    "https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity=
+                    "sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous">
+    </script>
+    <script src=
+                    "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity=
+                    "sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous">
+    </script>
+
   </head>
   <body>
     <!-- แถบเครื่องมือด้านซ้ายมือ -->
@@ -87,35 +112,63 @@
                 <p class="product-quantity">5</p>
               </div-->
             </div>
-            <div class="order-container">
-              <a href="#">
-                <button class="accept-order-button">
-                  Accept
-                </button>
-              </a>
-              <a href="#">
-                <button class="reject-order-button">
-                  Reject
-                </button>
-              </a>
-            </div>
+            <form th:action="@{/new-order}" th:object="${acceptOrder}" method="post">
+                <div class="order-container">
+                  <a href="#">
+                    <button class="accept-order-button" id="acceptBtn" name="orderID" value="2" th:value="${order.orderID}">
+                      Accept
+                    </button>
+                  </a>
+                  <a href="#">
+                    <button class="reject-order-button">
+                      Reject
+                    </button>
+                  </a>
+                </div>
+            </form>
           </div>
         </div>
-
-
       </div>
     </div>
 
     <!-- accept notification -->
     <div class="accept-notify">
       <div class="question">
+        <p>Order system</p>
         <p>Do you want to <u>accept</u> this order?</p>
       </div>
       <div class="decision-button">
         <button class="accept-button">Accept</button>
-        <button class="cancel-button">Cancel</button>
+        <button class="cancel-accept-button">Cancel</button>
       </div>
     </div>
+
+    <script>
+      /*
+      var acceptBtn = document.querySelectorAll(".accept-order-button");
+      var acceptPopup = document.querySelector(".accept-notify");
+      var closeacceptBtn = document.querySelectorAll(".cancel-accept-button");
+
+      acceptBtn.forEach(elem => {
+        elem.addEventListener("click", event => openModal());
+      });
+
+      closeacceptBtn.forEach(elem => {
+        elem.addEventListener("click", event => closeModal());
+      });
+
+      function openModal(){
+        acceptPopup.style.visibility = "visible";
+      }
+
+      function closeModal(){
+        acceptPopup.style.visibility = "hidden";
+      }
+
+       */
+    </script>
+
+
     <!-- reject notification -->
     <div class="reject-notify">
       <div class="question">

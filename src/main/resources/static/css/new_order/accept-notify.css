@@ -62,14 +62,14 @@
   background-color: #84cf4b;
 }
 
-.accept-notify .decision-button .cancel-button {
+.accept-notify .decision-button .cancel-accept-button {
   background-color: rgb(237, 235, 235);
 }
 
-.accept-notify .decision-button .cancel-button:hover {
+.accept-notify .decision-button .cancel-accept-button:hover {
   box-shadow: 0px 0px 7px rgba(0, 0, 0, .25);
 }
 
-.accept-notify .decision-button .cancel-button:active {
+.accept-notify .decision-button .cancel-accept-button:active {
   background-color: rgb(205, 205, 205);
 }
