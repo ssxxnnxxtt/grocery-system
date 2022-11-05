@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Add a customer</title>
+  <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/cosmo/bootstrap.min.css" />
+  <script type="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container text-center">
+  <div>
+    <h1>หน้าเพิ่มลูกค้าของร้าน</h1>
+  </div>
+  <form th:action="@{/}" th:object="${customer}"
+        method="post" style="max-width: 600px; margin: 0 auto;">
+    <div class="m-3">
+      <div class="form-group row">
+        <label class="col-4 col-form-label">ชื่อ : </label>
+        <div class="col-8">
+          <input type="text" th:field="*{customerName}" class="form-control" required />
+          <p th:if="${#fields.hasErrors('customerName')}" th:errors="*{customerName}" class="alert alert-danger"></p>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-4 col-form-label">เบอร์โทรศัพท์ : </label>
+        <div class="col-8">
+          <input type="text" th:field="*{phoneNumber}" class="form-control"
+                 required minlength="10" maxlength="10"/>
+          <p th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}" class="alert alert-danger"></p>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-4 col-form-label">ที่อยู่ : </label>
+        <div class="col-8">
+          <input type="text" th:field="*{address}" class="form-control"
+                 required minlength="2" maxlength="50"/>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-4 col-form-label">ไอดี Line : </label>
+        <div class="col-8">
+          <input type="text" th:field="*{lineID}" class="form-control"
+                 required minlength="2" maxlength="20" />
+        </div>
+      </div>
+
+      <div>
+        <button type="submit" class="btn btn-primary">เพิ่ม</button>
+      </div>
+    </div>
+  </form>
+</div>
+</body>
+</html>

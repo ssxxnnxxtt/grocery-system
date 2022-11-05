@@ -1,0 +1,109 @@
+.item {
+  display: flex;
+  flex-direction: row;
+  column-gap: 10px;
+  background-color: #e3e0dd;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px;
+  font-size: 16px;
+}
+
+.item:hover {
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, .25);
+}
+
+.order-id {
+  width: 100px;
+  border-right: 2px solid #ffffff;
+}
+
+.customer-name {
+  flex: 1;
+  border-right: 2px solid #ffffff;
+}
+
+.order-detail {
+  flex: 3;
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  border-right: 2px solid #ffffff;
+  text-align: left;
+}
+
+.order-detail div {
+  display: flex;
+  flex-direction: row;
+  margin-right: 10px;
+  border-radius: 10px;
+  border: 2px solid white;
+}
+
+.product-id {
+  flex: 2;
+}
+.product-name {
+  flex: 6;
+}
+.product-quantity {
+  flex: 1;
+}
+
+.order-detail p {
+  margin-left: 10px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* สินค้าพอ */
+.order-item-green {
+  background-color: #B3FFAE;
+}
+/* สินค้าขาด(ไม่เป็น 0) */
+.order-item-yellow {
+  background-color: #F8FFDB;
+}
+/* สินค้าไม่มี(เป็น 0) */
+.order-item-red {
+  background-color: #FF7D7D;
+}
+
+.order-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.order-container button {
+  margin: 4px;
+  cursor: pointer;
+  border: none;
+  background-color: #fff;
+  border-radius: 10px;
+  font-size: 16px;
+  border: solid white;
+
+  transition: background-color .2s;
+}
+
+.accept-notify .decision-button {
+  transition: background-color .2s;
+}
+
+.accept-order-button:hover {
+  background-color: #BCE29E;
+}
+
+.accept-order-button:active {
+  background-color: #95b47e;
+}
+
+.reject-order-button:hover {
+  background-color: #ff9f9f;
+}
+
+.reject-order-button:active {
+  background-color: #ce7a7a;
+}

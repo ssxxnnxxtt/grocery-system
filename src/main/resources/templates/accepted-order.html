@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8">
+    <title>Accepted-order</title>
+    <link rel="stylesheet" th:href="@{/css/accepted/sidebar.css}">
+    <link rel="stylesheet" th:href="@{/css/accepted/general.css}">
+    <link rel="stylesheet" th:href="@{/css/new_order/head.css}">
+    <link rel="stylesheet" th:href="@{/css/accepted/display.css}">
+    <link rel="stylesheet" th:href="@{/css/accepted/display-header.css}">
+    <link rel="stylesheet" th:href="@{/css/accepted/display-body.css}">
+    <link rel="stylesheet" th:href="@{/css/accepted/item.css}">
+    <link rel="stylesheet" th:href="@{/css/new_order/accept-notify.css}">
+    <link rel="stylesheet" th:href="@{/css/new_order/reject-notify.css}">
+  </head>
+
+  <body>
+    <!-- แถบเครื่องมือด้านซ้ายมือ -->
+    <div class="sidebar">
+      <div class="customer-link">
+        <a th:href="@{/}">
+          <button class="customer-link-button">
+            <img th:src="@{/icon/accepted/customer.png}">
+            <span class="tooltip">Customer</span>
+          </button>
+        </a>
+      </div>
+      <div class="order-link">
+        <a th:href="@{/accepted-order}">
+          <button class="order-link-button">
+            <img th:src="@{/icon/accepted/order.png}">
+            <span class="tooltip">Order</span>
+          </button>
+        </a>
+      </div>
+      <div class="about-link">
+        <button class="about-link-button">
+          <img th:src="@{/icon/accepted/info.png}">
+          <span class="tooltip">About</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- หน้าต่างตรงกลาง -->
+    <div class="main">
+      <!-- แท็บด้านบนสองแท็บ -->
+      <div class="tab">
+        <a th:href="@{/new-order}">
+          <button class="tab-new">New</button>
+         </a>
+         <a th:href="@{/accepted-order}">
+           <button class="tab-accepted">
+             Accepted
+           </button>
+         </a>
+      </div>
+      <!-- แท็บตรงกลาง -->
+      <div class="display">
+        <!-- แถบ sort -->
+        <div class="display-header">
+          <p>Sort by</p>
+          <select name="sort" id="" class="sort-selection">
+            <option value="option1">option1</option>
+            <option value="option1">option2</option>
+          </select>
+        </div>
+        <!-- ส่วนแสดงรายการสั่งซื้อสินค้า -->
+        <div class="display-body">
+          <div class="item" th:each="order: ${orders}">
+            <div class="order-id" th:text="${order.orderID}" />
+            <div class="customer-name" th:text="${order.customer.customerName}"/>
+            <div class="order-container">
+              <a href="#">
+                <button class="receipt-button">Receipt</button>
+              </a>
+              <select class="status-selection">
+                <option value="1">Approve</option>
+                <option value="2">Pending</option>
+                <option value="3">Preparing</option>
+                <option value="4">Delivering</option>
+                <option value="5">Delivered</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

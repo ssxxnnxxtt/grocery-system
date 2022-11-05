@@ -1,0 +1,96 @@
+.create-member {
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+  position: fixed;
+
+  top: 80px;
+  bottom: 90px;
+  right: 500px;
+  left: 500px;
+
+  background-color: white;
+  border: solid rgb(172, 172, 172);
+  border-radius: 10px;
+
+  padding: 30px 30px 20px 30px;
+
+  visibility: hidden;
+}
+
+.create-member .create-member-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-style: bold;
+  font-size: 22px;
+  margin-bottom: 50px;
+}
+
+.create-member div {
+  display: flex;
+  flex-direction: row;
+  column-gap: 10px;
+  background-color: rgb(222, 222, 222);
+  border-radius: 25px ;
+  border: none;
+  padding: 5px;
+  align-items: center;
+  font-size: 14px;
+}
+
+.create-member .topic {
+  text-align: right;
+  width: 120px;
+}
+
+.create-member .name {
+
+}
+
+.create-member .name button{
+  font-size: 16px;
+  height: 40px;
+  border-radius: 20px;
+  border: none;
+}
+.create-member .name p {
+  margin: 0;
+}
+.create-member .phone {
+
+}
+.create-member .address textarea {
+  width: 200px;
+}
+.create-member .line {
+
+}
+
+.create-member .alert-danger{
+  font-size: 16px;
+  text-align: left;
+  width: 500px;
+  color: red;
+}
+
+.create-member input {
+  font-size: 16px;
+  text-align: top;
+  width: 200px;
+}
+
+.create-member .decision-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.create-member .decision-button button {
+  width: 100px;
+  height: 50px;
+  border-radius: 25px;
+  border: none;
+  font-size: 16px;
+}

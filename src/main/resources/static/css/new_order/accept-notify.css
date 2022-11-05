@@ -1,0 +1,75 @@
+.accept-notify {
+  position: fixed;
+  top: 200px;
+  bottom: 200px;
+  left: 400px;
+  right: 400px;
+  border-radius: 10px;
+  border: none;
+  background-color: rgb(255, 255, 255);
+  z-index: 100;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  justify-items: center;
+
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, .25);
+
+  /* แสดงผล แก้ตรงนี้ */
+  visibility: hidden;
+}
+
+/* ข้อความยืนยัน */
+.accept-notify .question {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50px;
+  font-style: bold;
+  font-size: 30px;
+}
+
+.accept-notify .question u {
+  color: red;
+}
+
+.accept-notify .decision-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.accept-notify .decision-button button {
+  width: 100px;
+  height: 50px;
+  font-size: 20px;
+  margin: 30px;
+  border-radius: 10px;
+  border: solid rgb(175, 175, 175);
+  transition: background-color .2s;
+  cursor: pointer;
+}
+
+.accept-notify .decision-button .accept-button {
+  background-color: #98fc4c;
+}
+
+.accept-notify .decision-button .accept-button:hover {
+  box-shadow: 0px 0px 7px rgba(0, 0, 0, .25);
+}
+
+.accept-notify .decision-button .accept-button:active {
+  background-color: #84cf4b;
+}
+
+.accept-notify .decision-button .cancel-button {
+  background-color: rgb(237, 235, 235);
+}
+
+.accept-notify .decision-button .cancel-button:hover {
+  box-shadow: 0px 0px 7px rgba(0, 0, 0, .25);
+}
+
+.accept-notify .decision-button .cancel-button:active {
+  background-color: rgb(205, 205, 205);
+}

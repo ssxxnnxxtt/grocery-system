@@ -1,0 +1,68 @@
+.item {
+  display: flex;
+  flex-direction: row;
+  column-gap: 10px;
+  background-color: #e3e0dd;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px;
+  margin-bottom: 20px;
+}
+
+.item:hover {
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, .25);
+}
+
+.item .number {
+  width: 50px;
+  border-right: 2px solid #ffffff;
+}
+
+.item .customer-name {
+  flex: 1;
+  border-right: 2px solid #ffffff;
+}
+
+.item .customer-detail {
+  flex: 3;
+  display: flex;
+  flex-direction: column;
+  border-right: 2px solid #ffffff;
+}
+
+.item .customer-detail p {
+  margin: 2px;
+}
+
+.item .customer-order-container {
+  display: flex;
+  align-items: center;
+}
+
+.item .customer-order-container button {
+  margin: 4px;
+  cursor: pointer;
+  border: none;
+  background-color: #fff;
+  border-radius: 10px;
+  font-size: 16px;
+  border: solid white;
+
+  transition: background-color .2s;
+}
+
+.item .create-order-button:hover {
+  background-color: #FFDBA4;
+}
+
+.item .create-order-button:active {
+  background-color: #fff3e2;
+}
+
+.item .order-list-button:hover {
+  background-color: #ff9f9f;
+}
+
+.item .order-list-button:active {
+  background-color: #ffd3d3;
+}

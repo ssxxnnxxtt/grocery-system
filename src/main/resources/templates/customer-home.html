@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8">
+    <title>Customer</title>
+    <link rel="stylesheet" th:href="@{/css/customer/sidebar.css}">
+    <link rel="stylesheet" th:href="@{/css/customer/general.css}">
+    <link rel="stylesheet" th:href="@{/css/customer/head.css}">
+    <link rel="stylesheet" th:href="@{/css/customer/display.css}">
+    <link rel="stylesheet" th:href="@{/css/customer/display-header.css}">
+    <link rel="stylesheet" th:href="@{/css/customer/display-body.css}">
+    <link rel="stylesheet" th:href="@{/css/customer/item.css}">
+    <link rel="stylesheet" th:href="@{/css/customer/create-member.css}">
+    <link rel="stylesheet" th:href="@{/css/customer/create-order-select.css}">
+    <link rel="stylesheet" th:href="@{/css/customer/create-order-conclude.css}">
+
+  </head>
+
+  <body>
+    <!-- แถบเครื่องมือด้านซ้ายมือ -->
+    <div class="sidebar">
+        <div class="customer-link">
+          <a th:href="@{/}">
+            <button class="customer-link-button">
+              <img th:src="@{icon/customer/customer.png}">
+              <span class="tooltip">Customer</span>
+            </button>
+          </a>
+        </div>
+        <div class="order-link">
+          <a th:href="@{/new-order}">
+            <button class="order-link-button">
+              <img th:src="@{icon/customer/order.png}">
+              <span class="tooltip">Order</span>
+            </button>
+          </a>
+        </div>
+        <div class="about-link">
+          <button class="about-link-button">
+            <img th:src="@{icon/customer/info.png}">
+            <span class="tooltip">About</span>
+          </button>
+        </div>
+    </div>
+
+    <!-- หน้าต่างตรงกลาง -->
+    <div class="main">
+      <!-- แท็บด้านบนสองแท็บ -->
+      <div class="tab">
+        <button class="tab-list">Customer</button>
+        <button class="tab-detail">Detail</button>
+      </div>
+      <!-- แท็บตรงกลาง -->
+      <div class="display">
+        <!-- แถบเครื่องมือค้นหา เพิ่มรายชื่อลูกค้า -->
+          <div class="display-header">
+            <form th:action="@{/search}" th:object="${searchCustomer}" method="post">
+              <div class="display-header">
+                <input type="text" th:field="*{phoneNumber}" class="search-bar" placeholder="e.g. 0812345678">
+                <button class="search-button">
+                  <img th:src="@{/icon/customer/search.svg}" class="search-icon">
+                  <span class="tooltip">Search</span>
+                </button>
+              </div>
+            </form>
+            <button class="create-member-button" id="createMemberBtn" name="action" value="cancel">
+              &#43
+              <span class="tooltip">Create Member</span>
+            </button>
+          </div>
+
+        <!-- ส่วนแสดงรายชื่อลูกค้า -->
+        <div class="display-body">
+          <div class="item" th:each="cust: ${customers}">
+            <div class="number">1</div>
+            <div class="customer-name" th:text="${cust.customerName}"></div>
+            <div class="customer-detail">
+              <p>ที่อยู่: <span th:text="${cust.address}"/></p>
+              <p>ไอดีไลน์: <span th:text="${cust.lineID}"/></p>
+              <p>เบอร์โทรศัพท์: <span th:text="${cust.phoneNumber}"/></p>
+            </div>
+            <div class="customer-order-container">
+              <a href="#">
+                <button class="create-order-button" id="createOrderBtn">
+                  Create Order
+                </button>
+              </a>
+              <a href="#">
+                <button class="order-list-button" id="orderListBtn">
+                  Order list
+                </button>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- create member -->
+    <form th:action="@{/}" th:object="${customer}" method="post">
+        <div class="create-member" id="createMember">
+
+          <u class="create-member-header">สร้างสมาชิกใหม่</u>
+          <div class="name">
+            <p class="topic">ชื่อ-นามสกุล:</p>
+            <input type="text" th:field="*{customerName}" required>
+            <p th:if="${#fields.hasErrors('customerName')}" th:errors="*{customerName}" class="alert alert-danger"></p>
+          </div>
+          <div class="phone">
+            <p class="topic">เบอร์โทรศัพท์:</p>
+            <input type="text" th:field="*{phoneNumber}" required minlength="10" maxlength="10">
+            <p th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}" class="alert alert-danger"></p>
+          </div>
+          <div class="address">
+            <p class="topic">ที่อยู่</p>
+            <textarea name="text" wrap="soft" maxlength="400" th:field="*{address}">
+            </textarea>
+            <p th:if="${#fields.hasErrors('address')}" th:errors="*{address}" class="alert alert-danger"></p>
+          </div>
+          <div class="line">
+            <p class="topic">ไอดีไลน์:</p>
+            <input type="text" th:field="*{lineID}">
+            <p th:if="${#fields.hasErrors('lineID')}" th:errors="*{lineID}" class="alert alert-danger"></p>
+          </div>
+          <div class="decision-button">
+            <button type="submit" name="action" value="submit">สร้าง</button>
+            <button id="closeCreateMemberBtn" name="action" value="cancel">ยกเลิก</button>
+          </div>
+
+        </div>
+    </form>
+
+    <script>
+      var createMemberBtn = document.getElementById("createMemberBtn");
+      var createMemberPopup = document.getElementById("createMember");
+      var closeCreateMemberBtn = document.getElementById("closeCreateMemberBtn");
+
+      createMemberBtn.onclick = function (){
+        createMemberPopup.style.visibility = "visible";
+      }
+      closeCreateMemberBtn.onclick = function (){
+        createMemberPopup.style.visibility = "hidden";
+      }
+    </script>
+
+    <!-- create order -->
+    <!-- select product -->
+    <div class="create-order-select" id="createOrder">
+      <!-- close button -->
+      <section class="basket-button-container">
+        <div>
+          <button class="basket-button" id="createOrderConcludeBtn">
+            <img th:src="@{/icon/customer/basket.png}" class="basket-icon">
+            <span class="tooltip">See product list</span>
+          </button>
+        </div>
+      </section>
+      <section class="close-button-container">
+        <button class="close-button" id="closeCreateOrderBtn">
+          <img th:src="@{/icon/customer/close-button.png}" class="close-icon">
+          <span class="tooltip">Close</span>
+        </button>
+      </section>
+      <!-- header -->
+      <section class="create-order-header">
+        <u>Select order</u>
+      </section>
+      <!-- product -->
+      <section class="create-item-container"> <!--th:each="product: ${products}"-->
+        <div class="create-item" th:each="product: ${products}">
+          <div class="item-picture-container">
+            <img th:src="${product.productImage}" class="item-picture">
+          </div>
+          <div class="item-name" th:text="${product.productName}"/>
+          <div class="item-quantity-container">
+            <input type="number" min="1" max="1000">
+            <button>Add</button>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <script>
+      var createOrderBtn = document.getElementById("createOrderBtn");
+      var createOrderPopup = document.getElementById("createOrder");
+      var closeCreateOrderBtn = document.getElementById("closeCreateOrderBtn");
+
+      createOrderBtn.onclick = function () {
+        createOrderPopup.style.visibility = "visible";
+      }
+
+      closeCreateOrderBtn.onclick = function () {
+        createOrderPopup.style.visibility = "hidden";
+      }
+    </script>
+
+    <!-- conclude product -->
+    <div class="create-order-conclude" id="createOrderConclude">
+      <section class="close-button-container">
+        <button class="close-button" id="closeCreateOrderConcludeBtn">
+          <img th:src="@{/icon/customer/close-button.png}" class="close-icon">
+          <span class="tooltip">Close</span>
+        </button>        
+      </section>
+      <!-- header -->
+      <section class="conclude-order-header">
+        <u>Conclude order</u>
+      </section>
+      <!-- product -->
+      <section class="conclude-product-container">
+        <div>Product list</div>
+        <div class="product-detail-container">
+          <div class="product-detail">
+            <div class="product-name">Apple</div>
+            <div class="product-quantity">quantity</div>
+            <div class="product-price">price</div>
+          </div>
+        </div>
+      </section>
+      <footer class="footer">
+        <p>Deliver method:</p>
+        <select name="deliver-method" id="" class="method">
+          <option value="onsite">Self Pick-Up</option>
+          <option value="option1">Delivery</option>
+        </select>
+        <button class="create-button">Create</button>
+      </footer>
+    </div>
+
+  <script>
+    var createOrderConcludeBtn = document.getElementById("createOrderConcludeBtn");
+    var createOrderConcludePopup = document.getElementById("createOrderConclude");
+    var closeCreateOrderConcludeBtn = document.getElementById("closeCreateOrderConcludeBtn");
+
+    createOrderConcludeBtn.onclick = function () {
+      createOrderConcludePopup.style.visibility = "visible";
+    }
+
+    closeCreateOrderConcludeBtn.onclick = function () {
+      createOrderConcludePopup.style.visibility = "hidden";
+    }
+  </script>
+
+
+  </body>
+</html>

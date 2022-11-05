@@ -1,0 +1,99 @@
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  position: fixed;
+  background-color: #cabcae;
+  top: 30%;
+  bottom: 30%;
+  left: 20px;
+  width: 80px;
+  height: 250px;
+
+  border-radius: 10px;
+
+  box-shadow: 1px 1px 6px rgba(1, 1, 1, .25);
+
+  z-index: 100;
+}
+
+.customer-link,
+.order-link,
+.about-link {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 80px;
+}
+
+.customer-link-button,
+.order-link-button,
+.about-link-button {
+  height: 50px;
+  width: 50px;
+  padding: 0;
+  margin: 0;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+
+  display: flex;
+  position: relative;
+
+  
+  justify-content: center;
+  align-items: center;
+}
+
+.customer-link-button {
+  background-color: #FFDBA4;
+}
+
+.customer-link-button img {
+  width: 35px;
+}
+.order-link-button {
+  background-color: #FFB3B3;
+}
+
+.order-link-button img {
+  width: 30px;
+  margin-right: 3px;
+}
+
+.about-link-button {
+background-color: #fff;
+}
+.about-link-button img {
+  width: 40px;
+}
+
+.sidebar button:hover {
+  box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.6)
+}
+
+.sidebar button:hover .tooltip {
+  opacity: 1;
+}
+
+.sidebar button .tooltip {
+  position: absolute;
+  cursor: none;
+  white-space: nowrap;
+
+  font-size: 12px;
+  bottom: -22px;
+  opacity: 0;
+  transition: opacity .2s;
+
+  color: white;
+  background-color: rgba(121, 121, 121, 0.624);
+  border-radius: 5px;
+
+  padding: 2px 5px 2px 5px;
+
+  pointer-events: none;
+}
+

@@ -1,0 +1,97 @@
+.display-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  align-items: center;
+  padding-top: 10px;
+  padding-right: 30px;
+}
+
+.search-bar {
+  display: flex;
+  flex: 1;
+  font-size: 14px;
+  padding-left: 10px;
+  height: 25px;
+  width: 0;
+  max-width: 150px;
+  z-index: 1;
+
+  border-color: rgb(204, 204, 204);
+  border-style: solid;
+  border-radius: 5px;
+
+  
+  outline: none;
+}
+
+.search-button:hover {
+  background-color: rgb(231, 231, 231);
+}
+
+.display-header button {
+  cursor: pointer;
+  position: relative;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-button {
+  width: 50px;
+  height: 31px;
+  margin-left: -10px;
+  z-index: 2;
+  background-color: #fff;
+  border-radius: 0px 5px 5px 0px;
+  border: 2px solid rgb(204, 204, 204);
+
+  transition: background-color .2s;
+}
+
+.search-button img {
+  height: 20px;
+  margin-top: 2px;
+}
+
+.search-button:hover .tooltip {
+  opacity: 1;
+}
+
+.display-header .tooltip {
+  position: absolute;
+  cursor: none;
+  white-space: nowrap;
+  pointer-events: none;
+
+  font-size: 12px;
+  bottom: -25px;
+  opacity: 0;
+  transition: opacity .2s;
+
+  color: white;
+  background-color: rgba(121, 121, 121, 0.624);
+  border-radius: 5px;
+
+  padding: 2px 5px 2px 5px;
+}
+
+.create-member-button {
+  font-size: 24px;
+  width: 36px;
+  height: 36px;
+  border-radius: 20px;
+  border: none;
+  margin-left: 10px;
+  background-color: #fff;
+  transition: background-color .2s;
+}
+
+.create-member-button:hover {
+  background-color: rgb(231, 231, 231);
+}
+
+.create-member-button:hover .tooltip {
+  opacity: 1;
+}
