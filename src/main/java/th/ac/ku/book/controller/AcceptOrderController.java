@@ -43,7 +43,6 @@ public class AcceptOrderController {
     public String getReceiptOrder(@ModelAttribute("receiptOrderFormData") Orders formData, Model model){
         Orders receiptOrder = orderService.findOrderByID(formData.getOrderID());
         model.addAttribute("order", receiptOrder);
-        model.addAttribute("orders", receiptOrder.getOrderDetails());
         return "receipt";
     }
 }

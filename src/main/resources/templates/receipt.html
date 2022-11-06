@@ -3,14 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <title>Receipt</title>
+    <link rel="stylesheet" th:href="@{/css/receipt/receipt.css}">
 </head>
 <body>
-    <div th:object="${order}">
+    <!--div th:object="${order}">
         <p>This is receipt page <span th:text="${order.orderID}"/> </p>
     </div>
 
     <div th:each="orderDetail: ${order.getOrderDetails()}">
         <p th:text="${orderDetail.product.productName}"/>
+    </div-->
+
+    <div class="invoice" th:object="${order}">
+        <div class="header">
+            <img th:src="@{/icon/receipt/invoice.png}" class="invoice-icon">
+            <p>รหัสออเดอร์ <span th:text="${order.orderID}"/></p>
+        </div>
+        <div class="contact-info">
+            <h2>ข้อมูลติดต่อ</h2>
+            <p>
+                ที่อยู่ : <span th:text="${order.customer.address}"/></br>
+                ไอดีไลน์ : <span th:text="${order.customer.lineID}"/></br>
+                เบอร์โทรศัพท์   : <span th:text="${order.customer.phoneNumber}"/></br>
+            </p>
+        </div>
+        <section class="table">
+            <div class="table-title">
+                <p class="item">Item</p>
+                <p class="qty">Qty</p>
+                <p class="rate">Sub Total</p>
+            </div>
+            <div class="table-item" th:each="detail: ${order.getOrderDetails()}">
+                <p class="product-name" th:text="${detail.product.productName}"/>
+                <p class="product-qty" th:text="${detail.orderDetailQuantity}"/>
+                <p class="product-rate"><span th:text="${#numbers.formatDecimal(detail.orderDetailPrice, 0, 'COMMA', 2, 'POINT')}"/></p>
+            </div>
+        </section>
+        <section class="footer">
+            <p class="tax">ภาษี : 6%</p>
+            <p class="total-price">ราคารวมภาษี : <span th:text="${#numbers.formatDecimal(order.totalPriceIncludeVat, 0, 'COMMA', 2, 'POINT')}"/> บาท</p>
+        </section>
     </div>
+
 </body>
 </html>

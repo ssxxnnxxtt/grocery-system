@@ -138,6 +138,7 @@ public class CustomerController {
         deliveryMethod.setDeliveryMethodID(createDeliveryMethodID);
         orders.setDeliveryMethod(deliveryMethod);
 
+        //Save order to database
         orderService.addOrder(orders);
 
         Orders saveOrder = orderService.getOrderFromDateTime(now);

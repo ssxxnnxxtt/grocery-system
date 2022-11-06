@@ -1,0 +1,107 @@
+body {
+  margin: 10px;
+  padding: 0;
+}
+
+.invoice {
+  display: grid;
+  grid-template-columns: 50px 1fr 1fr 1fr;
+  grid-template-columns: auto;
+  width: 58mm;
+  height: auto;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, .25);
+  padding: 2mm;
+}
+
+.header {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+}
+
+.invoice-icon {
+  width: 50px;
+  margin: 10px;
+}
+
+.header p {
+  margin: 0;
+}
+
+.contact-info h2 {
+  margin: 10px;
+  padding-top: 5mm;
+  border-top: solid rgb(223, 223, 223);
+}
+
+.contact-info p {
+  margin: 0;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  border-bottom: solid rgb(223, 223, 223);
+  padding-bottom: 5mm;
+}
+
+.table {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.table div {
+  display: flex;
+  flex-direction: row;
+  column-gap: 2px;
+  font-size: 14px;
+}
+
+.item .qty .rate {
+}
+
+.item {
+  flex: 1
+}
+
+.qty {
+  width: 10mm;
+  text-align: left;
+}
+
+.rate {
+  width: 15mm;
+  text-align: left;
+}
+
+.product-name {
+  flex: 1;
+  padding-left: 2mm;
+  text-overflow: auto;
+}
+.product-qty {
+  width: 10mm;
+  text-align: right;
+}
+.product-rate {
+  width: 15mm;
+  text-align: left;
+  padding-right: 2mm;
+}
+
+.table-item p {
+  margin: 0;
+  margin-bottom: 2mm;
+
+}
+
+.footer p {
+  margin: 2mm;
+}
+
+.table-title {
+  background-color: rgb(231, 231, 231);
+  margin-bottom: 3mm;
+  padding-left: 2mm;
+  padding-right: 2mm;
+}

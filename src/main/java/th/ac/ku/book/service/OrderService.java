@@ -40,4 +40,10 @@ public class OrderService {
     public void addOrder(Orders orders){
         orderRepository.save(orders);
     }
+
+    public void addTotalPriceIncludeVat(Long orderID, Double price){
+        Orders orders = orderRepository.findById(orderID).get();
+        orders.setTotalPriceIncludeVat(price);
+        orderRepository.save(orders);
+    }
 }
