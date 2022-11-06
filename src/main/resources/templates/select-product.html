@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Select product</title>
+    <link rel="stylesheet" th:href="@{/css/selectp/create-order-select.css}">
+    <link rel="stylesheet" th:href="@{/css/selectp/create-order-conclude.css}">
+</head>
+
+<body>
+    <div class="create-order-select" th:object="${selectCustomer}">
+        <!-- close button -->
+        <section class="basket-button-container">
+            <div>
+                <button class="basket-button" id="createOrderConcludeBtn">
+                    <img th:src="@{/icon/customer/basket.png}" class="basket-icon">
+                    <span class="tooltip">See product list</span>
+                </button>
+            </div>
+        </section>
+        <section class="close-button-container">
+            <a th:href="@{/}">
+                <button class="close-button" id="closeCreateOrderBtn">
+                    <img th:src="@{/icon/customer/close-button.png}" class="close-icon">
+                    <span class="tooltip">Close</span>
+                </button>
+            </a>
+        </section>
+        <!-- header -->
+        <section class="create-order-header">
+            <u>เลือกสินค้าของ <span th:text="${selectCustomer.customerName}"/></u>
+        </section>
+        <!-- product -->
+        <section class="create-item-container"> <!--th:each="product: ${products}"-->
+            <div class="create-item" th:each="product: ${products}">
+                <form th:action="@{/select_product}" th:object="${addProduct}" method="post">
+                    <div class="item-picture-container">
+                        <img th:src="${product.productImage}" class="item-picture">
+                    </div>
+                    <div class="item-name" th:text="${product.productName}"/>
+                    <div class="item-quantity-container">
+                        <input name="productQuantity" type="number" min="1" max="1000" required>
+                        <button name="productID" th:value="${product.productID}">Add</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </div>
+
+    <!-- basket -->
+    <div class="create-order-conclude" id="createOrderConclude">
+        <section class="close-button-container">
+            <button class="close-button" id="closeCreateOrderConcludeBtn">
+                <img th:src="@{/icon/customer/close-button.png}" class="close-icon">
+                <span class="tooltip">Close</span>
+            </button>
+        </section>
+        <!-- header -->
+        <section class="conclude-order-header">
+            <u>ตะกร้าสินค้า</u>
+        </section>
+        <!-- product -->
+        <section class="conclude-product-container">
+            <div>Product list</div>
+            <div class="product-detail-container">
+                <div class="product-detail" th:each="b: ${baskets}">
+                    <div class="product-name" th:text="${b.getSelectProduct().productName}"/>
+                    <div class="product-quantity"><span th:text="${b.getSelectQuantity()}"/> <span> </span> <span th:text="${b.getSelectProduct().productUnit}"/></div>
+                    <div class="product-price"><span th:text="${b.getSelectProduct().productPrice}"/> <span> บาท</span></div>
+                </div>
+            </div>
+        </section>
+
+        <form th:action="@{/}" th:object="${createOrder}" method="post">
+            <footer class="footer" th:object="${currOrder}">
+                    <p>Deliver method:</p>
+                    <select class="method" name="deliveryMethod.deliveryMethodID">
+                        <option th:each="deliveryMethod: ${deliveryMethods}" th:value="${deliveryMethod.deliveryMethodID}" th:text="${deliveryMethod.deliveryMethodDetail}"></option>
+                    </select>
+                    <button class="create-button" name="orderID" th:value="${currOrder.orderID}">Create</button>
+            </footer>
+        </form>
+
+    </div>
+
+    <script>
+        var createOrderConcludeBtn = document.getElementById("createOrderConcludeBtn");
+        var createOrderConcludePopup = document.getElementById("createOrderConclude");
+        var closeCreateOrderConcludeBtn = document.getElementById("closeCreateOrderConcludeBtn");
+
+        createOrderConcludeBtn.onclick = function () {
+            createOrderConcludePopup.style.visibility = "visible";
+        }
+
+        closeCreateOrderConcludeBtn.onclick = function () {
+            createOrderConcludePopup.style.visibility = "hidden";
+        }
+    </script>
+</body>
+</html>

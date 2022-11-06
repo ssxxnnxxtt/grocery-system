@@ -56,7 +56,7 @@
           <div class="display-header">
             <form th:action="@{/search}" th:object="${searchCustomer}" method="post">
               <div class="display-header">
-                <input type="text" th:field="*{phoneNumber}" class="search-bar" placeholder="e.g. 0812345678">
+                <input type="number" th:field="*{phoneNumber}" class="search-bar" placeholder="e.g. 0812345678" required>
                 <button class="search-button">
                   <img th:src="@{/icon/customer/search.svg}" class="search-icon">
                   <span class="tooltip">Search</span>
@@ -80,11 +80,13 @@
               <p>เบอร์โทรศัพท์: <span th:text="${cust.phoneNumber}"/></p>
             </div>
             <div class="customer-order-container">
-              <a href="#">
-                <button class="create-order-button" id="createOrderBtn">
-                  Create Order
-                </button>
-              </a>
+              <form th:action="@{/select_product}" th:object="${selectProductCustomer}" method="get">
+                <a th:href="@{/select_product}">
+                  <button class="create-order-button" id="createOrderBtn" name="phoneNumber" th:value="${cust.phoneNumber}">
+                    Create Order
+                  </button>
+                </a>
+              </form>
               <a href="#">
                 <button class="order-list-button" id="orderListBtn">
                   Order list
@@ -145,8 +147,8 @@
 
     <!-- create order -->
     <!-- select product -->
+    <!--
     <div class="create-order-select" id="createOrder">
-      <!-- close button -->
       <section class="basket-button-container">
         <div>
           <button class="basket-button" id="createOrderConcludeBtn">
@@ -161,12 +163,12 @@
           <span class="tooltip">Close</span>
         </button>
       </section>
-      <!-- header -->
+
       <section class="create-order-header">
         <u>Select order</u>
       </section>
-      <!-- product -->
-      <section class="create-item-container"> <!--th:each="product: ${products}"-->
+
+      <section class="create-item-container">
         <div class="create-item" th:each="product: ${products}">
           <div class="item-picture-container">
             <img th:src="${product.productImage}" class="item-picture">
@@ -178,9 +180,10 @@
           </div>
         </div>
       </section>
-    </div>
+    </div>-->
 
     <script>
+      /*
       var createOrderBtn = document.getElementById("createOrderBtn");
       var createOrderPopup = document.getElementById("createOrder");
       var closeCreateOrderBtn = document.getElementById("closeCreateOrderBtn");
@@ -192,21 +195,21 @@
       closeCreateOrderBtn.onclick = function () {
         createOrderPopup.style.visibility = "hidden";
       }
+       */
     </script>
 
     <!-- conclude product -->
+    <!--
     <div class="create-order-conclude" id="createOrderConclude">
       <section class="close-button-container">
         <button class="close-button" id="closeCreateOrderConcludeBtn">
           <img th:src="@{/icon/customer/close-button.png}" class="close-icon">
           <span class="tooltip">Close</span>
-        </button>        
+        </button>
       </section>
-      <!-- header -->
       <section class="conclude-order-header">
         <u>Conclude order</u>
       </section>
-      <!-- product -->
       <section class="conclude-product-container">
         <div>Product list</div>
         <div class="product-detail-container">
@@ -226,8 +229,10 @@
         <button class="create-button">Create</button>
       </footer>
     </div>
+    -->
 
   <script>
+    /*
     var createOrderConcludeBtn = document.getElementById("createOrderConcludeBtn");
     var createOrderConcludePopup = document.getElementById("createOrderConclude");
     var closeCreateOrderConcludeBtn = document.getElementById("closeCreateOrderConcludeBtn");
@@ -239,6 +244,7 @@
     closeCreateOrderConcludeBtn.onclick = function () {
       createOrderConcludePopup.style.visibility = "hidden";
     }
+     */
   </script>
 
 

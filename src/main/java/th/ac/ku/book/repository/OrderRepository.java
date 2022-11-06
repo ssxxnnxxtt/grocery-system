@@ -6,6 +6,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import th.ac.ku.book.model.Orders;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
@@ -15,4 +16,7 @@ public interface OrderRepository extends JpaRepository<Orders, Long> {
 
     @Query(value = "select o from Orders o where o.status.statusID = 2 or o.status.statusID = 3 or o.status.statusID = 4 or o.status.statusID = 5 or o.status.statusID = 6")
     public List<Orders> findAllAcceptedOrder();
+
+    @Query(value = "select o from Orders o where o.dateRelease = :dateRelease")
+    public Orders getOrderFromDateTime(@Param("dateRelease") LocalDateTime dateRelease);
 }

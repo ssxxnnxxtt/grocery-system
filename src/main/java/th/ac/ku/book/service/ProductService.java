@@ -16,6 +16,10 @@ public class ProductService {
         return productRepository.findAll();
     }
 
+    public Product getProductByID(Long productID){
+        return productRepository.findById(productID).get();
+    }
+
     public void cutStock(Long productID, Integer remaining){
         Product product = productRepository.findById(productID).get();
         product.setProductQuantity(remaining);

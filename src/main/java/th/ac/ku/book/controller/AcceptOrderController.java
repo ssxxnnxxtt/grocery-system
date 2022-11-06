@@ -1,5 +1,6 @@
 package th.ac.ku.book.controller;
 
+import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,12 +29,21 @@ public class AcceptOrderController {
         model.addAttribute("orders", ordersList);
         model.addAttribute("statuses", statusList);
         model.addAttribute("statusOrder", new Orders());
+        model.addAttribute("receiptOrder", new Orders());
         return "accepted-order";
     }
 
-    /*@PostMapping("/accepted-order")
-    public String getStatusID(@ModelAttribute("orderAcceptFormdata") Orders formData, Model model){
-        System.out.println(formData.getStatus().getStatusID());
+    @PostMapping("/accepted-order")
+    public String getStatusID(@ModelAttribute("orderStatusFormData") Orders formData, Model model){
+        orderService.changeStatus(formData.getOrderID(), formData.getStatus().getStatusID());
         return "redirect:/accepted-order";
-    }*/
+    }
+
+    @PostMapping("/accepted-order/receipt")
+    public String getReceiptOrder(@ModelAttribute("receiptOrderFormData") Orders formData, Model model){
+        Orders receiptOrder = orderService.findOrderByID(formData.getOrderID());
+        model.addAttribute("order", receiptOrder);
+        model.addAttribute("orders", receiptOrder.getOrderDetails());
+        return "receipt";
+    }
 }

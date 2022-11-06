@@ -73,12 +73,14 @@
             <p>Status: <span th:text="${order.status.statusDetail}"/> </p>
             <!--div class="status-detail" th:text="${order.status.statusDetail}"/-->
             <div class="order-container">
-              <a href="#">
-                <button class="receipt-button">Receipt</button>
-              </a>
+              <form th:action="@{/accepted-order/receipt}" th:object="${receiptOrder}" method="post">
+                  <a th:href="@{/accepted-order/receipt}">
+                    <button class="receipt-button" name="orderID" th:value="${order.orderID}">Receipt</button>
+                  </a>
+              </form>
 
               <form th:action="@{/accepted-order}" th:object="${statusOrder}" method="post">
-                <select class="status-selection">
+                <select class="status-selection" name="status.statusID">
                   <!--
                   <option name="status.statusID" value=2 th:value="${statusOrder.status.statusID}">approved</option>
                   <option name="status.statusID" value=3 th:value="${statusOrder.status.statusID}" th:value="${3}">pending payment</option>
@@ -88,6 +90,7 @@
                   -->
                   <option th:each="status: ${statuses}" th:value="${status.statusID}" th:text="${status.statusDetail}"/>
                 </select>
+                <button class="receipt-button" name="orderID" th:value="${order.orderID}">+</button>
               </form>
 
             </div>

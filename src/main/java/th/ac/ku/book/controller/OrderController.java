@@ -50,7 +50,7 @@ public class OrderController {
         }
 
         //Change status order (new => approve)
-        orderService.changeToApprovedStatus(formData.getOrderID());
+        orderService.changeStatus(formData.getOrderID(), 2);
         return "redirect:/new-order";
     }
 }

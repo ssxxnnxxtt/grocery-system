@@ -7,6 +7,7 @@ import th.ac.ku.book.model.Orders;
 import th.ac.ku.book.model.Status;
 import th.ac.ku.book.repository.OrderRepository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -24,11 +25,19 @@ public class OrderService {
 
     public Orders findOrderByID(Long orderID) {return orderRepository.findById(orderID).get(); }
 
-    public void changeToApprovedStatus(Long orderID){
+    public void changeStatus(Long orderID, Integer changeStatusID){
         Orders orders = orderRepository.findById(orderID).get();
         Status status = new Status();
-        status.setStatusID(2);
+        status.setStatusID(changeStatusID);
         orders.setStatus(status);
+        orderRepository.save(orders);
+    }
+
+    public Orders getOrderFromDateTime(LocalDateTime localDateTime){
+        return orderRepository.getOrderFromDateTime(localDateTime);
+    }
+
+    public void addOrder(Orders orders){
         orderRepository.save(orders);
     }
 }
