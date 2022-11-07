@@ -7,34 +7,34 @@
 </head>
 
 <body>
-    <form th:action="@{/}" th:object="${customer}" method="post">
-        <div class="create-member" id="createMember">
-            <u class="create-member-header">สร้างสมาชิกใหม่</u>
-            <div class="name">
-                <p class="topic">ชื่อ-นามสกุล:</p>
-                <input type="text" th:field="*{customerName}" required>
-                <p th:if="${#fields.hasErrors('customerName')}" th:errors="*{customerName}" class="alert alert-danger"></p>
+        <form th:action="@{/}" th:object="${customer}" method="post">
+            <div class="create-member" id="createMember">
+                <u class="create-member-header">Register</u>
+                <div class="name">
+                    <p class="topic">Full name:</p>
+                    <input type="text" th:field="*{customerName}" required>
+                    <p th:if="${#fields.hasErrors('customerName')}" th:errors="*{customerName}" class="alert-danger"></p>
+                </div>
+                <div class="phone">
+                    <p class="topic">Phone Number:</p>
+                    <input type="text" th:field="*{phoneNumber}" required minlength="10" maxlength="10">
+                    <p th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}" class="alert-danger"></p>
+                </div>
+                <div class="address">
+                    <p class="topic">Address:</p>
+                    <textarea name="text" wrap="soft" maxlength="400" th:field="*{address}">
+                    </textarea>
+                    <p th:if="${#fields.hasErrors('address')}" th:errors="*{address}" class="alert-danger"></p>
+                </div>
+                <div class="line">
+                    <p class="topic">Line ID:</p>
+                    <input type="text" th:field="*{lineID}">
+                    <p th:if="${#fields.hasErrors('lineID')}" th:errors="*{lineID}" class="alert-danger"></p>
+                </div>
+                <div class="decision-button">
+                    <button type="submit" name="action" value="submit">Create</button>
+                </div>
             </div>
-            <div class="phone">
-                <p class="topic">เบอร์โทรศัพท์:</p>
-                <input type="text" th:field="*{phoneNumber}" required minlength="10" maxlength="10">
-                <p th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}" class="alert alert-danger"></p>
-            </div>
-            <div class="address">
-                <p class="topic">ที่อยู่</p>
-                <textarea name="text" wrap="soft" maxlength="400" th:field="*{address}">
-                </textarea>
-                <p th:if="${#fields.hasErrors('address')}" th:errors="*{address}" class="alert alert-danger"></p>
-            </div>
-            <div class="line">
-                <p class="topic">ไอดีไลน์:</p>
-                <input type="text" th:field="*{lineID}">
-                <p th:if="${#fields.hasErrors('lineID')}" th:errors="*{lineID}" class="alert alert-danger"></p>
-            </div>
-            <div class="decision-button">
-                <button type="submit" name="action" value="submit">สร้าง</button>
-            </div>
-        </div>
-    </form>
+        </form>
 </body>
 </html>

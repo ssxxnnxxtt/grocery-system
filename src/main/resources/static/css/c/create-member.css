@@ -1,13 +1,16 @@
+body {
+  display: flex;
+  justify-content: center;
+  padding: 100px 10px 50px 10px;
+  margin: 0;
+}
+
 .create-member {
   display: flex;
+  min-width: 550px;
+  max-width: 700px;
   flex-direction: column;
   row-gap: 20px;
-  position: fixed;
-
-  top: 80px;
-  bottom: 90px;
-  right: 500px;
-  left: 500px;
 
   background-color: white;
   border: solid rgb(172, 172, 172);
@@ -16,6 +19,8 @@
   padding: 30px 30px 20px 30px;
 
   visibility: visible;
+
+  font-family: Arial;
 }
 
 .create-member .create-member-header {
@@ -24,7 +29,7 @@
   align-items: center;
   font-style: bold;
   font-size: 22px;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
 }
 
 .create-member div {
@@ -45,7 +50,7 @@
 }
 
 .create-member .name {
-
+  position: relative;
 }
 
 .create-member .name button{
@@ -58,20 +63,31 @@
   margin: 0;
 }
 .create-member .phone {
+  position: relative;
+}
 
+.create-member .address {
+  position: relative;
 }
 .create-member .address textarea {
   width: 200px;
 }
 .create-member .line {
-
+  position: relative;
 }
 
 .create-member .alert-danger{
-  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  font-size: 14px;
   text-align: left;
-  width: 500px;
   color: red;
+  bottom: -16px;
+  cursor: none;
+  white-space: nowrap;
+  margin: 0;
 }
 
 .create-member input {

@@ -13,21 +13,22 @@ import java.util.Set;
 @Table(name = "customer")
 public class Customer {
     @Id
-    @Pattern(regexp = "[0][1-9][0-9]{8}", message = "- กรุณากรอกเป็นหมายโทรศัพท์ที่เริ่มต้นด้วย 0 เท่านั้น")
-    @Size(min=10, max=10, message = "- กรุณากรอกหมายโทรศัพท์ให้ครบ 10 ตัว")
+    @Pattern(regexp = "[0][1-9][0-9]{8}", message = "* Please enter a phone number starting with 0 only.")
+    @Size(min=10, max=10, message = "* Please fill 10 digits in your phone number.")
     @Column(name = "phone_number")
     private String phoneNumber;
 
     @NotNull
-    @Pattern(regexp = "[ก-๛]+[ ][ก-๛]+", message = "- กรุณากรอกชื่อ-นามสกุลเป็นภาษาไทยเท่านั้น และกรอกให้ครบถ้วน")
+    @Pattern(regexp = "[ก-๛]+[ ][ก-๛]+", message = "* Please enter your first and last name in Thai language " +
+            "and fill out completely")
     @Column(name = "customer_name")
     private String customerName;
 
-    @Size(max=50, message = "- ตัวอักษรเกินที่กำหนดเอาไว้ (50 ตัวอักษร)")
+    @Size(max=50, message = "* Characters over than the limit (50 characters)")
     @Column(name = "address")
     private String address;
 
-    @Size(max=20, message = "- ตัวอักษรเกินที่กำหนดเอาไว้ (20 ตัวอักษร)")
+    @Size(max=20, message = "* Characters over than the limit (20 characters)")
     @Column(name = "line_id")
     private String lineID;
 

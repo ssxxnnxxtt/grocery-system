@@ -62,18 +62,23 @@
                 </button>
               </div>
             </form>
-            <a th:href="@{/create-customer}">
-              <button class="create-member-button">
-                &#43
-                <span class="tooltip">Create Member</span>
+            <div class="display-header">
+              <button class="reset-button">
+                <img th:src="@{/icon/customer/reset-icon.png}" class="reset-icon">
+                <span class="tooltip">Reset</span>
               </button>
-            </a>
+              <a th:href="@{/create-customer}">
+                <button class="create-member-button">
+                  &#43
+                  <span class="tooltip">Create Member</span>
+                </button>
+              </a>
+            </div>
           </div>
 
         <!-- ส่วนแสดงรายชื่อลูกค้า -->
         <div class="display-body">
           <div class="item" th:each="cust: ${customers}">
-            <div class="number">1</div>
             <div class="customer-name" th:text="${cust.customerName}"></div>
             <div class="customer-detail">
               <p>ที่อยู่: <span th:text="${cust.address}"/></p>
