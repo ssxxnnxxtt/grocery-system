@@ -1,8 +1,34 @@
 .item {
+
+}
+
+.item .item-green{
   display: flex;
   flex-direction: row;
   column-gap: 10px;
-  background-color: #e3e0dd;
+  background-color: #B3FFAE;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px;
+  font-size: 16px;
+}
+
+.item .item-yellow{
+  display: flex;
+  flex-direction: row;
+  column-gap: 10px;
+  background-color: #F8FFDB;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px;
+  font-size: 16px;
+}
+
+.item .item-red{
+  display: flex;
+  flex-direction: row;
+  column-gap: 10px;
+  background-color: #FF7D7D;
   border-radius: 10px;
   padding: 10px;
   margin: 10px;
@@ -56,17 +82,8 @@
   font-weight: bold;
 }
 
-/* สินค้าพอ */
-.order-item-green {
-  background-color: #B3FFAE;
-}
-/* สินค้าขาด(ไม่เป็น 0) */
-.order-item-yellow {
-  background-color: #F8FFDB;
-}
-/* สินค้าไม่มี(เป็น 0) */
-.order-item-red {
-  background-color: #FF7D7D;
+.order-item {
+  background-color: #ffffff;
 }
 
 .order-container {

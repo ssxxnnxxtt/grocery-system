@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import th.ac.ku.book.model.OrderDetail;
 import th.ac.ku.book.model.Orders;
+import th.ac.ku.book.model.StatusOrder;
 import th.ac.ku.book.service.OrderService;
 import th.ac.ku.book.service.ProductService;
 
@@ -25,8 +26,19 @@ public class OrderController {
     @RequestMapping("/new-order")
     public String getNewOrderPage(Model model) {
         List<Orders> ordersList = orderService.findAllNewOrder();
-        model.addAttribute("orders", ordersList);
+        List<StatusOrder> statusOrders = new ArrayList<>();
+
+        //Set color for each order
+        for (Orders orders: ordersList){
+            StatusOrder statusOrder = new StatusOrder();
+            statusOrder.setOrders(orders);
+            statusOrder.setStatusColor();
+            statusOrders.add(statusOrder);
+        }
+
+        model.addAttribute("statusOrders", statusOrders);
         model.addAttribute("acceptOrder", new Orders());
+        //model.addAttribute("viewOrders", ordersList);
         return "new-order";
     }
 
@@ -39,6 +51,10 @@ public class OrderController {
         List<Double> productPriceIncludeVatList = new ArrayList<>();
         double totalPriceIncludeVat = 0;
 
+        //Find if(orderDetail.getProduct().getProductQuantity() < orderDetail.getOrderDetailQuantity()) return;
+        for (OrderDetail orderDetail: currOrder.getOrderDetails()){
+            if (orderDetail.getProduct().getProductQuantity() < orderDetail.getOrderDetailQuantity()) return "redirect:/new-order";
+        }
 
         //Find remaining of product and calculate total_price
         for (OrderDetail orderDetail: currOrder.getOrderDetails()){

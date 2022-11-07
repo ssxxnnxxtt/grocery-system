@@ -90,49 +90,116 @@
         </div>
         <!-- ส่วนแสดงรายการสั่งซื้อสินค้า -->
         <div class="display-body">
-          <div class="item" th:each="order: ${orders}">
-            <div class="order-id" th:text="${order.orderID}"/>
-            <div class="customer-name" th:text="${order.customer.customerName}"/>
-            <!-- detail ต่อ 1 รายการ -->
-            <div class="order-detail">
-              <!-- สินค้าที่เลือกซื้อ -->
-              <div class="order-item-green" th:each="orderDetail: ${order.getOrderDetails()}">
-                <p class="product-id" >PID: <span th:text="${orderDetail.product.productID}"/></p>
-                <p class="product-name" th:text="${orderDetail.product.productName}" />
-                <p class="product-quantity" th:text="${orderDetail.orderDetailQuantity}">
+
+          <div class="item" th:each="statusOrder: ${statusOrders}">
+
+            <div class="item-green" th:if="${statusOrder.statusColor==1}">
+              <div class="order-id" th:text="${statusOrder.getOrders().orderID}"/>
+              <div class="customer-name" th:text="${statusOrder.getOrders().customer.customerName}"/>
+              <!-- detail ต่อ 1 รายการ -->
+              <div class="order-detail">
+                <!-- สินค้าที่เลือกซื้อ -->
+                <div class="order-item" th:each="orderDetail: ${statusOrder.getOrders().getOrderDetails()}">
+                  <p class="product-id" >PID: <span th:text="${orderDetail.product.productID}"/></p>
+                  <p class="product-name" th:text="${orderDetail.product.productName}" />
+                  <p class="product-quantity" th:text="${orderDetail.orderDetailQuantity}">
+                  <p>สินค้าเพียงพอ</p>
+                </div>
               </div>
-              <!--div class="order-item-yellow">
-                <p class="product-id">PID: 002</p>
-                <p class="product-name">Banana</p>
-                <p class="product-quantity">10</p>
+
+              <div class="order-container">
+                <form th:action="@{/new-order-accept}" th:object="${acceptOrder}" method="post">
+                  <a href="#">
+                    <button class="accept-order-button" name="orderID" value="accept" th:value="${statusOrder.getOrders().orderID}"> <!--th:value="${order.orderID}"-->
+                      Accept
+                    </button>
+                  </a>
+                </form>
+
+                <form th:action="@{/new-order-reject}" th:object="${acceptOrder}" method="post">
+                  <a href="#">
+                    <button class="reject-order-button" name="orderID" value="reject" th:value="${statusOrder.getOrders().orderID}">
+                      Reject
+                    </button>
+                  </a>
+                </form>
               </div>
-              <div class="order-item-red">
-                <p class="product-id">PID: 003</p>
-                <p class="product-name">Egg</p>
-                <p class="product-quantity">5</p>
-              </div-->
             </div>
 
-            <div class="order-container">
-              <form th:action="@{/new-order-accept}" th:object="${acceptOrder}" method="post">
-                <a href="#">
-                  <button class="accept-order-button" name="orderID" value="accept" th:value="${order.orderID}"> <!--th:value="${order.orderID}"-->
-                    Accept
-                  </button>
-                </a>
-              </form>
+            <div class="item-yellow" th:if="${statusOrder.statusColor==2}">
+              <div class="order-id" th:text="${statusOrder.getOrders().orderID}"/>
+              <div class="customer-name" th:text="${statusOrder.getOrders().customer.customerName}"/>
+              <!-- detail ต่อ 1 รายการ -->
+              <div class="order-detail">
+                <!-- สินค้าที่เลือกซื้อ -->
+                <div class="order-item" th:each="orderDetail: ${statusOrder.getOrders().getOrderDetails()}">
+                  <p class="product-id" >PID: <span th:text="${orderDetail.product.productID}"/></p>
+                  <p class="product-name" th:text="${orderDetail.product.productName}" />
+                  <p class="product-quantity" th:text="${orderDetail.orderDetailQuantity}">
+                  <p th:if="${orderDetail.product.productQuantity >= orderDetail.orderDetailQuantity}">สินค้าเพียงพอ</p>
+                  <p th:if="${orderDetail.product.productQuantity < orderDetail.orderDetailQuantity}">สินค้าไม่เพียงพอ</p>
+                </div>
+              </div>
 
-              <form th:action="@{/new-order-reject}" th:object="${acceptOrder}" method="post">
-                <a href="#">
-                  <button class="reject-order-button" name="orderID" value="reject" th:value="${order.orderID}">
-                    Reject
-                  </button>
-                </a>
-              </form>
+              <div class="order-container">
+                <form th:action="@{/new-order-accept}" th:object="${acceptOrder}" method="post">
+                  <a href="#">
+                    <button class="accept-order-button" name="orderID" value="accept" th:value="${statusOrder.getOrders().orderID}">
+                      Accept
+                    </button>
+                  </a>
+                </form>
+
+                <form th:action="@{/new-order-reject}" th:object="${acceptOrder}" method="post">
+                  <a href="#">
+                    <button class="reject-order-button" name="orderID" value="reject" th:value="${statusOrder.getOrders().orderID}">
+                      Reject
+                    </button>
+                  </a>
+                </form>
+              </div>
+            </div>
+
+            <div class="item-red" th:if="${statusOrder.statusColor==3}">
+              <div class="order-id" th:text="${statusOrder.getOrders().orderID}"/>
+              <div class="customer-name" th:text="${statusOrder.getOrders().customer.customerName}"/>
+              <!-- detail ต่อ 1 รายการ -->
+              <div class="order-detail">
+                <!-- สินค้าที่เลือกซื้อ -->
+                <div class="order-item" th:each="orderDetail: ${statusOrder.getOrders().getOrderDetails()}">
+                  <p class="product-id" >PID: <span th:text="${orderDetail.product.productID}"/></p>
+                  <p class="product-name" th:text="${orderDetail.product.productName}" />
+                  <p class="product-quantity" th:text="${orderDetail.orderDetailQuantity}">
+                  <p>สินค้าไม่เพียงพอ</p>
+                </div>
+              </div>
+
+              <div class="order-container">
+                <form th:action="@{/new-order-accept}" th:object="${acceptOrder}" method="post">
+                  <a href="#">
+                    <button class="accept-order-button" name="orderID" value="accept" th:value="${statusOrder.getOrders().orderID}"> <!--th:value="${order.orderID}"-->
+                      Accept
+                    </button>
+                  </a>
+                </form>
+
+                <form th:action="@{/new-order-reject}" th:object="${acceptOrder}" method="post">
+                  <a href="#">
+                    <button class="reject-order-button" name="orderID" value="reject" th:value="${statusOrder.getOrders().orderID}">
+                      Reject
+                    </button>
+                  </a>
+                </form>
+              </div>
             </div>
 
           </div>
+
+
+
+
         </div>
+
       </div>
     </div>
 

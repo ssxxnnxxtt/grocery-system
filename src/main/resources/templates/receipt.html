@@ -6,18 +6,11 @@
     <link rel="stylesheet" th:href="@{/css/receipt/receipt.css}">
 </head>
 <body>
-    <!--div th:object="${order}">
-        <p>This is receipt page <span th:text="${order.orderID}"/> </p>
-    </div>
-
-    <div th:each="orderDetail: ${order.getOrderDetails()}">
-        <p th:text="${orderDetail.product.productName}"/>
-    </div-->
-
     <div class="invoice" th:object="${order}">
         <div class="header">
             <img th:src="@{/icon/receipt/invoice.png}" class="invoice-icon">
             <p>รหัสออเดอร์ <span th:text="${order.orderID}"/></p>
+            <p>เวลาสั่งซื้อ <span th:text="${order.dateRelease}"/></p>
         </div>
         <div class="contact-info">
             <h2>ข้อมูลติดต่อ</h2>
