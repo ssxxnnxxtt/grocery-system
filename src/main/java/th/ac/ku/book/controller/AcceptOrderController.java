@@ -12,6 +12,7 @@ import th.ac.ku.book.model.Status;
 import th.ac.ku.book.service.OrderService;
 import th.ac.ku.book.service.StatusService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -25,7 +26,20 @@ public class AcceptOrderController {
     @RequestMapping("/accepted-order")
     public String getAcceptedOrderPage(Model model) {
         List<Orders> ordersList = orderService.findAllAcceptedOrder();
-        List<Status> statusList = statusService.getAcceptStatus();
+        List<Status> statusList = statusService.getApprove();
+
+        /*List<Status> statusList = new ArrayList<>();
+        for (Orders orders: ordersList){
+            switch (orders.getStatus().getStatusID()){
+                case 2:
+                    statusList = statusService.getApprove();
+                    break;
+                case 3:
+                    statusList = statusService.getPending();
+                    break;
+            }
+        }*/
+
         model.addAttribute("orders", ordersList);
         model.addAttribute("statuses", statusList);
         model.addAttribute("statusOrder", new Orders());

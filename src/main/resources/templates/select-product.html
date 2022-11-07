@@ -42,6 +42,18 @@
                         <input name="productQuantity" type="number" min="1" max="1000" required>
                         <button name="productID" th:value="${product.productID}">Add</button>
                     </div>
+                    <div class="remain-container">
+                        <p>คงเหลือ:</p>
+                        <p th:text="${product.productQuantity}"/>
+                        <p> </p>
+                        <p th:text="${product.productUnit}"/>
+                    </div>
+                    <div class="per-item-container">
+                        <p>ราคาต่อชิ้น:</p>
+                        <p th:text="${product.productPrice}"/>
+                        <p> </p>
+                        <p>บาท</p>
+                    </div>
                 </form>
             </div>
         </section>

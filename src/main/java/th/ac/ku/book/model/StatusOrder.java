@@ -6,6 +6,7 @@ import java.util.List;
 public class StatusOrder {
     private Orders orders;
     private int statusColor;
+    private List<Status> statuses;
 
     public void setOrders(Orders orders){
         this.orders = orders;

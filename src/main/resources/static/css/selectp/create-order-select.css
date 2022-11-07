@@ -4,7 +4,6 @@ body {
   align-items: center;
 }
 
-
 .create-order-select {
   display: grid;
   grid-template-rows: 500px;
@@ -163,7 +162,7 @@ body {
 
 .create-order-select .create-item-container .create-item {
   display: flex;
-  height: 300px;
+  height: 350px;
   background-color: #efefef;
   padding: 10px;
   justify-content: center;
@@ -181,7 +180,7 @@ body {
 
 .create-item .item-picture-container .item-picture {
   width: 160px;
-  border-radius: 10px;;
+  border-radius: 10px;
 }
 
 .item-name {
@@ -196,4 +195,28 @@ body {
   height: 30px;
   column-gap: 10px;
   justify-content: center;
+}
+
+.remain-container {
+  display: flex;
+  justify-content: center;
+  column-gap: 5px;
+  align-items: center;
+  margin-top: 5px;
+}
+
+.remain-container p {
+  margin: 0;
+}
+
+.per-item-container {
+  display: flex;
+  justify-content: center;
+  column-gap: 5px;
+  align-items: center;
+  margin: 2px;
+}
+
+.per-item-container p {
+  margin: 0;
 }

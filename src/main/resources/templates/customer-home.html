@@ -63,10 +63,12 @@
               </div>
             </form>
             <div class="display-header">
-              <button class="reset-button">
-                <img th:src="@{/icon/customer/reset-icon.png}" class="reset-icon">
-                <span class="tooltip">Reset</span>
-              </button>
+              <a th:href="@{/}">
+                <button class="reset-button">
+                  <img th:src="@{/icon/customer/reset-icon.png}" class="reset-icon">
+                  <span class="tooltip">Reset</span>
+                </button>
+              </a>
               <a th:href="@{/create-customer}">
                 <button class="create-member-button">
                   &#43

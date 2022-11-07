@@ -59,11 +59,11 @@
       <div class="display">
         <!-- แถบ sort -->
         <div class="display-header">
-          <p>Sort by</p>
-          <select name="sort" id="" class="sort-selection">
-            <option value="option1">option1</option>
-            <option value="option1">option2</option>
-          </select>
+<!--          <p>Sort by</p>-->
+<!--          <select name="sort" id="" class="sort-selection">-->
+<!--            <option value="option1">option1</option>-->
+<!--            <option value="option1">option2</option>-->
+<!--          </select>-->
         </div>
         <!-- ส่วนแสดงรายการสั่งซื้อสินค้า -->
         <div class="display-body">
@@ -81,21 +81,17 @@
 
               <form th:action="@{/accepted-order}" th:object="${statusOrder}" method="post">
                 <select class="status-selection" name="status.statusID">
-                  <!--
-                  <option name="status.statusID" value=2 th:value="${statusOrder.status.statusID}">approved</option>
-                  <option name="status.statusID" value=3 th:value="${statusOrder.status.statusID}" th:value="${3}">pending payment</option>
-                  <option name="status.statusID" value=4 th:value="${statusOrder.status.statusID}" th:value="${4}">preparing</option>
-                  <option name="status.statusID" value=5 th:value="${statusOrder.status.statusID}" th:value="${5}">delivering</option>
-                  <option name="status.statusID" value=6 th:value="${statusOrder.status.statusID}">delivered</option>
-                  -->
                   <option th:each="status: ${statuses}" th:value="${status.statusID}" th:text="${status.statusDetail}"/>
                 </select>
+                <!--select class="status-selection" name="status.statusID" th:if="${order.status.statusID == 3}">
+                  <option th:each="status: ${statuses}" th:value="${status.statusID}" th:text="${status.statusDetail}"/>
+                </select-->
                 <button class="receipt-button" name="orderID" th:value="${order.orderID}">+</button>
               </form>
-
             </div>
           </div>
         </div>
+
       </div>
     </div>
   </body>

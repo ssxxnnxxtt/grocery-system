@@ -7,13 +7,10 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import th.ac.ku.book.model.Customer;
-import th.ac.ku.book.model.Product;
 import th.ac.ku.book.service.CustomerService;
 import th.ac.ku.book.service.ProductService;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 public class CreateCustomerController {

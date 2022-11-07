@@ -12,7 +12,23 @@ public class StatusService {
     @Autowired
     StatusRepository statusRepository;
 
-    public List<Status> getAcceptStatus(){
-        return statusRepository.getAcceptStatus();
+    public List<Status> getApprove(){
+        return statusRepository.getApprove();
+    }
+
+    public List<Status> getPending(){
+        return statusRepository.getApprove();
+    }
+
+    public List<Status> getPreparing(){
+        return statusRepository.getApprove();
+    }
+
+    public List<Status> getDelivering(){
+        return statusRepository.getApprove();
+    }
+
+    public List<Status> getDelivered(){
+        return statusRepository.getApprove();
     }
 }
