@@ -44,12 +44,20 @@ public class StatusOrder {
         this.statusColor = 2;
     }
 
+    public void setStatuses(List<Status> statuses){
+        this.statuses = statuses;
+    }
+
     public Orders getOrders() {
         return orders;
     }
 
     public int getStatusColor() {
         return statusColor;
+    }
+
+    public List<Status> getStatuses(){
+        return statuses;
     }
 
     /*

@@ -67,26 +67,35 @@
         </div>
         <!-- ส่วนแสดงรายการสั่งซื้อสินค้า -->
         <div class="display-body">
-          <div class="item" th:each="order: ${orders}">
-            <div class="order-id" th:text="${order.orderID}" />
-            <div class="customer-name" th:text="${order.customer.customerName}"/>
-            <p>Status: <span th:text="${order.status.statusDetail}"/> </p>
+          <div class="item" th:each="order: ${s}">
+            <div class="order-id" th:text="${order.orders.orderID}" />
+            <div class="customer-name" th:text="${order.orders.customer.customerName}"/>
+            <!--p>Status: <span th:text="${order.orders.status.statusDetail}"/> </p-->
             <!--div class="status-detail" th:text="${order.status.statusDetail}"/-->
             <div class="order-container">
               <form th:action="@{/accepted-order/receipt}" th:object="${receiptOrder}" method="post">
                   <a th:href="@{/accepted-order/receipt}">
-                    <button class="receipt-button" name="orderID" th:value="${order.orderID}">Receipt</button>
+                    <button class="receipt-button" name="orderID" th:value="${order.orders.orderID}">Receipt</button>
                   </a>
               </form>
 
               <form th:action="@{/accepted-order}" th:object="${statusOrder}" method="post">
-                <select class="status-selection" name="status.statusID">
-                  <option th:each="status: ${statuses}" th:value="${status.statusID}" th:text="${status.statusDetail}"/>
+                <select class="status-selection" name="status.statusID" th:if="${order.orders.status.statusID == 2}">
+                  <option th:each="status: ${order.getStatuses()}" th:value="${status.statusID}" th:text="${status.statusDetail}"/>
                 </select>
-                <!--select class="status-selection" name="status.statusID" th:if="${order.status.statusID == 3}">
-                  <option th:each="status: ${statuses}" th:value="${status.statusID}" th:text="${status.statusDetail}"/>
-                </select-->
-                <button class="receipt-button" name="orderID" th:value="${order.orderID}">+</button>
+                <select class="status-selection" name="status.statusID" th:if="${order.orders.status.statusID == 3}">
+                  <option th:each="status: ${order.getStatuses()}" th:value="${status.statusID}" th:text="${status.statusDetail}"/>
+                </select>
+                <select class="status-selection" name="status.statusID" th:if="${order.orders.status.statusID == 4}">
+                  <option th:each="status: ${order.getStatuses()}" th:value="${status.statusID}" th:text="${status.statusDetail}"/>
+                </select>
+                <select class="status-selection" name="status.statusID" th:if="${order.orders.status.statusID == 5}">
+                  <option th:each="status: ${order.getStatuses()}" th:value="${status.statusID}" th:text="${status.statusDetail}"/>
+                </select>
+                <select class="status-selection" name="status.statusID" th:if="${order.orders.status.statusID == 6}">
+                  <option th:each="status: ${order.getStatuses()}" th:value="${status.statusID}" th:text="${status.statusDetail}"/>
+                </select>
+                <button class="receipt-button" name="orderID" th:value="${order.orders.orderID}">+</button>
               </form>
             </div>
           </div>

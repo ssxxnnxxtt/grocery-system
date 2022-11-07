@@ -17,18 +17,18 @@ public class StatusService {
     }
 
     public List<Status> getPending(){
-        return statusRepository.getApprove();
+        return statusRepository.getPending();
     }
 
     public List<Status> getPreparing(){
-        return statusRepository.getApprove();
+        return statusRepository.getPreparing();
     }
 
     public List<Status> getDelivering(){
-        return statusRepository.getApprove();
+        return statusRepository.getDelivering();
     }
 
     public List<Status> getDelivered(){
-        return statusRepository.getApprove();
+        return statusRepository.getDelivered();
     }
 }

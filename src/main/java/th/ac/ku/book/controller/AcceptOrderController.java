@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import th.ac.ku.book.model.Orders;
 import th.ac.ku.book.model.Status;
+import th.ac.ku.book.model.StatusOrder;
 import th.ac.ku.book.service.OrderService;
 import th.ac.ku.book.service.StatusService;
 
@@ -26,22 +27,40 @@ public class AcceptOrderController {
     @RequestMapping("/accepted-order")
     public String getAcceptedOrderPage(Model model) {
         List<Orders> ordersList = orderService.findAllAcceptedOrder();
-        List<Status> statusList = statusService.getApprove();
+        //List<Status> statusList = statusService.getApprove();
+        List<StatusOrder> statusOrderList = new ArrayList<>();
 
-        /*List<Status> statusList = new ArrayList<>();
+
+        //List<Status> statusList = new ArrayList<>();
         for (Orders orders: ordersList){
+            StatusOrder statusOrder = new StatusOrder();
+            statusOrder.setOrders(orders);
+            List<Status> statuses = new ArrayList<>();
+
             switch (orders.getStatus().getStatusID()){
                 case 2:
-                    statusList = statusService.getApprove();
+                    statuses = statusService.getApprove();
                     break;
                 case 3:
-                    statusList = statusService.getPending();
+                    statuses = statusService.getPending();
+                    break;
+                case 4:
+                    statuses = statusService.getPreparing();
+                    break;
+                case 5:
+                    statuses = statusService.getDelivering();
+                    break;
+                case 6:
+                    statuses = statusService.getDelivered();
                     break;
             }
-        }*/
+            statusOrder.setStatuses(statuses);
+            statusOrderList.add(statusOrder);
+        }
 
-        model.addAttribute("orders", ordersList);
-        model.addAttribute("statuses", statusList);
+
+        model.addAttribute("s", statusOrderList);
+        //model.addAttribute("statuses", statusList);
         model.addAttribute("statusOrder", new Orders());
         model.addAttribute("receiptOrder", new Orders());
         return "accepted-order";
