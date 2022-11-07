@@ -37,7 +37,6 @@ public class CustomerController {
     public String showCustomers(Model model){
         List<Customer> customers = customerService.getAllCustomers();
         model.addAttribute("customers", customers);
-        model.addAttribute("customer", new Customer());
         model.addAttribute("searchCustomer", new Customer());
         return "customer-home";
     }
@@ -50,13 +49,12 @@ public class CustomerController {
         customers.add(customer);
         model.addAttribute("customers", customers);
         model.addAttribute("products", products);
-        model.addAttribute("customer", new Customer());
         model.addAttribute("searchCustomer", new Customer());
         model.addAttribute("selectProductCustomer", new Customer());
         return "customer-home";
     }
 
-    @PostMapping(value = "/", params = "action=submit")
+    /*@PostMapping(value = "/", params = "action=submit")
     public String addCustomer(@Valid Customer customer, Errors errors, Model model) {
         if (errors.hasErrors()){
             return "redirect:/";
@@ -70,7 +68,7 @@ public class CustomerController {
     @PostMapping(value = "/", params = "action=cancel")
     public String cancel(Model model) {
         return "redirect:/";
-    }
+    }*/
 
     //Start select_product page
     @GetMapping(value = "/select_product")

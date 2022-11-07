@@ -10,7 +10,6 @@
     <link rel="stylesheet" th:href="@{/css/customer/display-header.css}">
     <link rel="stylesheet" th:href="@{/css/customer/display-body.css}">
     <link rel="stylesheet" th:href="@{/css/customer/item.css}">
-    <link rel="stylesheet" th:href="@{/css/customer/create-member.css}">
     <link rel="stylesheet" th:href="@{/css/customer/create-order-select.css}">
     <link rel="stylesheet" th:href="@{/css/customer/create-order-conclude.css}">
 
@@ -63,10 +62,12 @@
                 </button>
               </div>
             </form>
-            <button class="create-member-button" id="createMemberBtn" name="action" value="cancel">
-              &#43
-              <span class="tooltip">Create Member</span>
-            </button>
+            <a th:href="@{/create-customer}">
+              <button class="create-member-button">
+                &#43
+                <span class="tooltip">Create Member</span>
+              </button>
+            </a>
           </div>
 
         <!-- ส่วนแสดงรายชื่อลูกค้า -->
@@ -99,7 +100,7 @@
     </div>
   
     <!-- create member -->
-    <form th:action="@{/}" th:object="${customer}" method="post">
+    <!--form th:action="@{/}" th:object="${customer}" method="post">
         <div class="create-member" id="createMember">
 
           <u class="create-member-header">สร้างสมาชิกใหม่</u>
@@ -129,9 +130,10 @@
             <button id="closeCreateMemberBtn" name="action" value="cancel">ยกเลิก</button>
           </div>
         </div>
-    </form>
+    </form-->
 
     <script>
+      /*
       var createMemberBtn = document.getElementById("createMemberBtn");
       var createMemberPopup = document.getElementById("createMember");
       var closeCreateMemberBtn = document.getElementById("closeCreateMemberBtn");
@@ -142,6 +144,7 @@
       closeCreateMemberBtn.onclick = function (){
         createMemberPopup.style.visibility = "hidden";
       }
+      */
     </script>
 
     <!-- create order -->

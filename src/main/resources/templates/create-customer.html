@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create customer</title>
+    <link rel="stylesheet" th:href="@{/css/c/create-member.css}">
+</head>
+
+<body>
+    <form th:action="@{/}" th:object="${customer}" method="post">
+        <div class="create-member" id="createMember">
+            <u class="create-member-header">สร้างสมาชิกใหม่</u>
+            <div class="name">
+                <p class="topic">ชื่อ-นามสกุล:</p>
+                <input type="text" th:field="*{customerName}" required>
+                <p th:if="${#fields.hasErrors('customerName')}" th:errors="*{customerName}" class="alert alert-danger"></p>
+            </div>
+            <div class="phone">
+                <p class="topic">เบอร์โทรศัพท์:</p>
+                <input type="text" th:field="*{phoneNumber}" required minlength="10" maxlength="10">
+                <p th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}" class="alert alert-danger"></p>
+            </div>
+            <div class="address">
+                <p class="topic">ที่อยู่</p>
+                <textarea name="text" wrap="soft" maxlength="400" th:field="*{address}">
+                </textarea>
+                <p th:if="${#fields.hasErrors('address')}" th:errors="*{address}" class="alert alert-danger"></p>
+            </div>
+            <div class="line">
+                <p class="topic">ไอดีไลน์:</p>
+                <input type="text" th:field="*{lineID}">
+                <p th:if="${#fields.hasErrors('lineID')}" th:errors="*{lineID}" class="alert alert-danger"></p>
+            </div>
+            <div class="decision-button">
+                <button type="submit" name="action" value="submit">สร้าง</button>
+            </div>
+        </div>
+    </form>
+</body>
+</html>
