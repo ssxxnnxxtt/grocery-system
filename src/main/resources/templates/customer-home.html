@@ -52,7 +52,12 @@
       <!-- แท็บตรงกลาง -->
       <div class="display">
         <!-- แถบเครื่องมือค้นหา เพิ่มรายชื่อลูกค้า -->
-          <div class="display-header">
+          <div class="display-header" th:object="${errorString}">
+            <div class="search-validate">
+              <p th:if="${errorString != null}">
+                <span th:text="${errorString}"/>
+              </p>
+            </div>
             <form th:action="@{/search}" th:object="${searchCustomer}" method="post">
               <div class="display-header">
                 <input type="number" th:field="*{phoneNumber}" class="search-bar" placeholder="e.g. 0812345678" required>

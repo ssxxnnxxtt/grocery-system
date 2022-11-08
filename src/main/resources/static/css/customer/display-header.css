@@ -127,3 +127,17 @@ input::-webkit-inner-spin-button {
 .create-member-button:hover .tooltip {
   opacity: 1;
 }
+
+.search-validate {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ff4c4c;
+  margin-right: 5px;
+  cursor: none;
+  pointer-events: none;
+  padding: 10px;
+  font-size: 14px;
+  height: 20px;
+  margin-top: 10px;
+}

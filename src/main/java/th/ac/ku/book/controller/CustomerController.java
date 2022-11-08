@@ -40,6 +40,7 @@ public class CustomerController {
     @GetMapping("/")
     public String showCustomers(Model model){
         List<Customer> customers = customerService.getAllCustomers();
+        model.addAttribute("errorString", null);
         model.addAttribute("customers", customers);
         model.addAttribute("searchCustomer", new Customer());
         return "customer-home";
@@ -48,6 +49,7 @@ public class CustomerController {
     @PostMapping("/search")
     public String searchCustomer(@ModelAttribute("customerSearchFormData") Customer formData, Model model){
         if(!formData.getPhoneNumber().matches("[0][1-9][0-9]{8}")){
+            model.addAttribute("errorString", "*Your input not match the phone format.");
             model.addAttribute("searchCustomer", new Customer());
             return "customer-home";
         }
@@ -63,26 +65,11 @@ public class CustomerController {
             return "customer-home";
         } catch (NoSuchElementException e){
             e.printStackTrace();
+            model.addAttribute("errorString", "*This phone not found this system.");
             model.addAttribute("searchCustomer", new Customer());
             return "customer-home";
         }
     }
-
-    /*@PostMapping(value = "/", params = "action=submit")
-    public String addCustomer(@Valid Customer customer, Errors errors, Model model) {
-        if (errors.hasErrors()){
-            return "redirect:/";
-        }
-        customerService.addCustomer(customer);
-        List<Customer> customers = customerService.getAllCustomers();
-        model.addAttribute("customers", customers);
-        return "redirect:/";
-    }
-
-    @PostMapping(value = "/", params = "action=cancel")
-    public String cancel(Model model) {
-        return "redirect:/";
-    }*/
 
     //Start select_product page
     @GetMapping(value = "/select_product")
