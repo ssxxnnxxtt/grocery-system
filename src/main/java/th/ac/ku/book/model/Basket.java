@@ -24,6 +24,10 @@ public class Basket {
         return selectQuantity;
     }
 
+    public void addQuantity(Integer quantity){
+        this.selectQuantity += quantity;
+    }
+
     public void setSelectQuantity(Integer selectQuantity) {
         this.selectQuantity = selectQuantity;
     }

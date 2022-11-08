@@ -11,6 +11,7 @@ import th.ac.ku.book.service.CustomerService;
 import th.ac.ku.book.service.ProductService;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 public class CreateCustomerController {
@@ -31,6 +32,14 @@ public class CreateCustomerController {
         if (errors.hasErrors()){
             return "create-customer";
         }
+        System.out.println(customer.getPhoneNumber());
+        List<Customer> oldCustomerList = customerService.getAllCustomers();
+        for (Customer old: oldCustomerList){
+            if (old.getPhoneNumber().matches(customer.getPhoneNumber())){
+                return "create-customer";
+            }
+        }
+
         customerService.addCustomer(customer);
         return "redirect:/";
     }

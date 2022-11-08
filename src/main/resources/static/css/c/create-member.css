@@ -70,7 +70,8 @@ body {
   position: relative;
 }
 .create-member .address textarea {
-  width: 200px;
+  width: 300px;
+  height: 60px;
 }
 .create-member .line {
   position: relative;
@@ -93,7 +94,7 @@ body {
 .create-member input {
   font-size: 16px;
   text-align: top;
-  width: 200px;
+  width: 300px;
 }
 
 .create-member .decision-button {
@@ -109,4 +110,27 @@ body {
   border-radius: 25px;
   border: none;
   font-size: 16px;
+  transition: background-color .2s;
+  cursor: pointer;
+}
+.decision-button button:hover {
+  background-color: #cbcbcb;
+}
+
+.cancel-create-button {
+  /*display: flex;*/
+  position: fixed;
+  bottom: 175px;
+  right: 510px;
+  width: 100px;
+  height: 50px;
+  border-radius: 25px;
+  border: none;
+  font-size: 16px;
+  transition: background-color .2s;
+  cursor: pointer;
+}
+
+.cancel-create-button:hover {
+  background-color: #cbcbcb;
 }

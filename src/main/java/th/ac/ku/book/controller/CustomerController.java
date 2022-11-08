@@ -9,9 +9,11 @@ import th.ac.ku.book.model.*;
 import th.ac.ku.book.service.*;
 
 import javax.validation.Valid;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Controller
 public class CustomerController {
@@ -33,6 +35,8 @@ public class CustomerController {
     private Customer selectCustomer;
     private List<Basket> basketCollection = new ArrayList<>();
 
+    private List<Long> addedProductList = new ArrayList<>();
+
     @GetMapping("/")
     public String showCustomers(Model model){
         List<Customer> customers = customerService.getAllCustomers();
@@ -43,15 +47,25 @@ public class CustomerController {
 
     @PostMapping("/search")
     public String searchCustomer(@ModelAttribute("customerSearchFormData") Customer formData, Model model){
-        Customer customer = customerService.getCustomerByPhoneNumber(formData.getPhoneNumber());
-        List<Customer> customers = new ArrayList<>();
-        List<Product> products = productService.getAllProducts();
-        customers.add(customer);
-        model.addAttribute("customers", customers);
-        model.addAttribute("products", products);
-        model.addAttribute("searchCustomer", new Customer());
-        model.addAttribute("selectProductCustomer", new Customer());
-        return "customer-home";
+        if(!formData.getPhoneNumber().matches("[0][1-9][0-9]{8}")){
+            model.addAttribute("searchCustomer", new Customer());
+            return "customer-home";
+        }
+        try {
+            Customer customer = customerService.getCustomerByPhoneNumber(formData.getPhoneNumber());
+            List<Customer> customers = new ArrayList<>();
+            List<Product> products = productService.getAllProducts();
+            customers.add(customer);
+            model.addAttribute("customers", customers);
+            model.addAttribute("products", products);
+            model.addAttribute("searchCustomer", new Customer());
+            model.addAttribute("selectProductCustomer", new Customer());
+            return "customer-home";
+        } catch (NoSuchElementException e){
+            e.printStackTrace();
+            model.addAttribute("searchCustomer", new Customer());
+            return "customer-home";
+        }
     }
 
     /*@PostMapping(value = "/", params = "action=submit")
@@ -96,13 +110,29 @@ public class CustomerController {
         return "select-product";
     }
 
+    //Add for each product
     @PostMapping(value = "/select_product")
     public String clickViewProduct(@ModelAttribute("selectProductFormData") Product formData, Model model){
         //Manage add product to basket list
         Product selectProduct = productService.getProductByID(formData.getProductID());
+        boolean had = false;
 
-        Basket currBasket = new Basket(selectProduct, formData.getProductQuantity());
-        basketCollection.add(currBasket);
+        for (Basket checkBasket: basketCollection){
+            if (checkBasket.getSelectProduct().getProductID() == selectProduct.getProductID()){
+                had = true;
+            }
+        }
+
+        if (had){
+            for (int i = 0; i < basketCollection.size(); i++){
+                if (basketCollection.get(i).getSelectProduct().getProductID() == selectProduct.getProductID()){
+                    basketCollection.get(i).addQuantity(formData.getProductQuantity());
+                }
+            }
+        } else{
+            Basket currBasket = new Basket(selectProduct, formData.getProductQuantity());
+            basketCollection.add(currBasket);
+        }
 
         List<Product> products = productService.getAllProducts();
         List<DeliveryMethod> deliveryMethods = deliveryMethodService.getAllDeliveryMethods();
@@ -121,7 +151,24 @@ public class CustomerController {
     }
 
     @PostMapping(value = "/", name = "orderID")
-    public String createOrder(@ModelAttribute("createOrderFormData") Orders formData){
+    public String createOrder(@ModelAttribute("createOrderFormData") Orders formData, Model model){
+        if (basketCollection.size() == 0){
+            List<Product> products = productService.getAllProducts();
+            List<DeliveryMethod> deliveryMethods = deliveryMethodService.getAllDeliveryMethods();
+
+            Orders orders = new Orders();
+            long id = 0;
+            orders.setOrderID(id);
+
+            model.addAttribute("products", products);
+            model.addAttribute("selectCustomer", selectCustomer);
+            model.addAttribute("baskets", basketCollection);
+            model.addAttribute("deliveryMethods", deliveryMethods);
+            model.addAttribute("createOrder", new Orders());
+            model.addAttribute("currOrder", orders);
+            return "select-product";
+        }
+
         Orders orders = new Orders();
         LocalDateTime now = LocalDateTime.now();
         orders.setDateRelease(now);
@@ -149,7 +196,6 @@ public class CustomerController {
             orderDetail.setOrderDetailPrice(basketCollection.get(i).getSelectProduct().getProductPrice());
             orderDetailService.addOrderDetails(orderDetail);
         }
-
         return "redirect:/";
     }
 }
